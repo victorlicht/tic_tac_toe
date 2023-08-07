@@ -32,33 +32,33 @@ int checkWinner(char gameBoard[3][3]) {
     return 0;
 }
 
-int inputGame(Player *player) {
+int inputGame(Player player) {
     // Function of getting the right input
     printf("Enter the row number=: ");
-    if(scanf("%d", player->rowInput) != 1 || (*player->rowInput != 0 && *player->rowInput != 1 && *player->rowInput != 2)){
+    if(scanf("%d", player.rowInput) != 1 || (*player.rowInput != 0 && *player.rowInput != 1 && *player.rowInput != 2)){
         printf("Invalid Input!!");
         return -1;
     }
     printf("Enter the Column number=: ");
-    if(scanf("%d", player->columnInput) != 1 || (*player->columnInput != 0 && *player->columnInput != 1 && *player->columnInput != 2)){
+    if(scanf("%d", player.columnInput) != 1 || (*player.columnInput != 0 && *player.columnInput != 1 && *player.columnInput != 2)){
         printf("Invalid Input!!");
         return -1;
     }
 
     return 0;
 }
-void inputPlayerName(Player *player) {
+void inputPlayerName(Player player) {
     // Function to get the name of players
-    printf("Player %d:\nEnter Your Name=: ", player->playerID);
-    scanf("%s", player->name);
+    printf("Player %d:\nEnter Your Name=: ", player.playerID);
+    scanf("%s", player.name);
 }
-void playerInformation(Player *player) {
+void playerInformation(Player player) {
     // Function to display the information of the two players.
-    printf("Player %d:\n Name=: %s\n", player->playerID, player->name);
-    printf("Score=: %d", *player->score);
+    printf("Player %d:\n Name=: %s\n", player.playerID, player.name);
+    printf("Score=: %d", *player.score);
 }
-bool theRightInputs(char gameBoard[3][3], Player *player) {
-    if (gameBoard[*player->rowInput][*player->columnInput] == 'X' || gameBoard[*player->rowInput][*player->columnInput] == 'Y') {
+bool theRightInputs(char gameBoard[3][3], Player player) {
+    if (gameBoard[*player.rowInput][*player.columnInput] == 'X' || gameBoard[*player.rowInput][*player.columnInput] == 'Y') {
         return false;
     }
     return true;
@@ -75,27 +75,83 @@ void theBoard(char gameBoard[3][3]) {
         printf("]\n");
     }
 }
-void displayTheBoard(char gameBoard[3][3], Player *player) {
-    int checkBoardInput;
-    bool endGame = false;
-    theBoard(gameBoard);
-    while (!endGame) {
-            do {
-                printf("You can just enter the values {0, 1, 2}");
-                printf("Now %s Enter Your Move: ", player->name);
-                checkBoardInput = inputGame(player);
-                if(!theRightInputs(gameBoard, player)) {
-                    checkBoardInput = -1;
-                    printf("There is an input there IDIOT!!");
-                }
-            }while (checkBoardInput == 0);
-    }
-}
+
 
 int main() {
     char gameBoard[3][3] = { {0, 0, 0},
                              {0, 0, 0},
                              {0, 0, 0} };
+    Player player1;
+    Player player2;
+    player1.score = (int*)malloc(sizeof(int));
+    player2.score = (int*)malloc(sizeof(int));
+    player1.rowInput = (int*)malloc(sizeof(int));
+    player1.columnInput = (int*)malloc(sizeof(int));
+    player2.rowInput = (int*)malloc(sizeof(int));
+    player2.columnInput = (int*)malloc(sizeof(int));
+    inputPlayerName(player1);
+    inputPlayerName(player2);
+    player1.playerID = 1;
+    player2.playerID = 2;
+
+    for (int i = 0; i < 9; ++i) {
+        if (i % 2 == 0) {
+            int checkBoardInput;
+            theBoard(gameBoard);
+            do {
+                printf("You can just enter the values {0, 1, 2}");
+                printf("Now %s Enter Your Move: ", player1.name);
+                checkBoardInput = inputGame(player1);
+                if (!theRightInputs(gameBoard, player1)) {
+                    checkBoardInput = -1;
+                    printf("There is an input there IDIOT!!\n");
+                }
+            } while (checkBoardInput == -1);
+
+            // Update the game board with the player's move
+            gameBoard[*player1.rowInput][*player1.columnInput] = 'X';
+        } else {
+            int checkBoardInput;
+            theBoard(gameBoard);
+            do {
+                printf("You can just enter the values {0, 1, 2}");
+                printf("Now %s Enter Your Move: ", player2.name);
+                checkBoardInput = inputGame(player2);
+                if (!theRightInputs(gameBoard, player2)) {
+                    checkBoardInput = -1;
+                    printf("There is an input there IDIOT!!\n");
+                }
+            } while (checkBoardInput == -1);
+
+            // Update the game board with the player's move
+            gameBoard[*player2.rowInput][*player2.columnInput] = 'O';
+        }
+
+        int result = checkWinner(gameBoard);
+        if (result == 1) {
+            printf("The player %s WIN :)\n", player1.name);
+            *player1.score += 1;
+            break;
+        } else if (result == -1) {
+            printf("The player %s WIN :)\n", player2.name);
+            *player2.score += 1;
+            break;
+        } else if (i == 8) {
+            printf("DRAW!\n");
+        }
+    }
+
+    playerInformation(player1);
+    playerInformation(player2);
+
+    // Free the dynamically allocated memory
+    free(player1.score);
+    free(player2.score);
+    free(player1.rowInput);
+    free(player1.columnInput);
+    free(player2.rowInput);
+    free(player2.columnInput);
+
     return 0;
 }
 
