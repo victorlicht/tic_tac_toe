@@ -6,7 +6,7 @@ typedef struct player {
     int *score;
     int *rowInput;
     int *columnInput;
-    int playerID;
+    int *playerID;
 }Player;
 
 
@@ -47,14 +47,14 @@ int inputGame(Player player) {
 
     return 0;
 }
-void inputPlayerName(Player player) {
+void inputPlayerName(Player *player) {
     // Function to get the name of players
-    printf("Player %d:\nEnter Your Name=: ", player.playerID);
-    scanf("%s", player.name);
+    printf("Player %d:\nEnter Your Name=: ", *player->playerID);
+    scanf("%s", player->name);
 }
 void playerInformation(Player player) {
     // Function to display the information of the two players.
-    printf("Player %d:\n Name=: %s\n", player.playerID, player.name);
+    printf("Player %d:\n Name=: %s\n", *player.playerID, player.name);
     printf("Score=: %d", *player.score);
 }
 bool theRightInputs(char gameBoard[3][3], Player player) {
@@ -89,10 +89,13 @@ int main() {
     player1.columnInput = (int*)malloc(sizeof(int));
     player2.rowInput = (int*)malloc(sizeof(int));
     player2.columnInput = (int*)malloc(sizeof(int));
-    inputPlayerName(player1);
-    inputPlayerName(player2);
-    player1.playerID = 1;
-    player2.playerID = 2;
+    player1.playerID = (int*)malloc(sizeof(int));
+    player2.playerID = (int*)malloc(sizeof(int));
+    *player1.playerID = 1;
+    *player2.playerID = 2;
+    inputPlayerName(&player1);
+    inputPlayerName(&player2);
+
 
     for (int i = 0; i < 9; ++i) {
         if (i % 2 == 0) {
@@ -151,7 +154,8 @@ int main() {
     free(player1.columnInput);
     free(player2.rowInput);
     free(player2.columnInput);
-
+    free(player1.playerID);
+    free(player2.playerID);
     return 0;
 }
 
