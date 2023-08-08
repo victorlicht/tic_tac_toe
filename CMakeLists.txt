@@ -3,4 +3,6 @@ project(tic_tac_toe C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(tic_tac_toe main.c)
+add_executable(tic_tac_toe src/main.c include/player.h include/game.h include/board.h src/board.c src/player.c src/game.c)
+
+
