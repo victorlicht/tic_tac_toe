@@ -10,7 +10,7 @@ void theBoard(char gameBoard[3][3]) {
         printf("[");
         for (int j = 0; j < 3; ++j) {
             if (gameBoard[i][j] == 0) {
-                printf(" . ");
+                printf(".");
             }
             printf("%c ", gameBoard[i][j]);
         }

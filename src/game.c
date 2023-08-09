@@ -19,19 +19,18 @@ int checkWinner(char gameBoard[3][3]) {
                 return (currentPlayer == 'X') ? 1 : -1;
         }
     }
-    // No Winner
     return 0;
 }
 
 int inputGame(Player player) {
-    printf("Enter the row number=: ");
+    printf("\nEnter the row number=: ");
     if(scanf("%d", player.rowInput) != 1 || (*player.rowInput != 0 && *player.rowInput != 1 && *player.rowInput != 2)){
-        printf("Invalid Input!!");
+        printf("Invalid Input!!\n");
         return -1;
     }
-    printf("Enter the Column number=: ");
+    printf("\nEnter the Column number=: ");
     if(scanf("%d", player.columnInput) != 1 || (*player.columnInput != 0 && *player.columnInput != 1 && *player.columnInput != 2)){
-        printf("Invalid Input!!");
+        printf("Invalid Input!!\n");
         return -1;
     }
 
@@ -39,7 +38,7 @@ int inputGame(Player player) {
 }
 
 bool theRightInputs(char gameBoard[3][3], Player player) {
-    if (gameBoard[*player.rowInput][*player.columnInput] == 'X' || gameBoard[*player.rowInput][*player.columnInput] == 'Y') {
+    if (gameBoard[*player.rowInput][*player.columnInput] == 'X' || gameBoard[*player.rowInput][*player.columnInput] == 'O') {
         return false;
     }
     return true;
