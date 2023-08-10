@@ -17,3 +17,4 @@ void theBoard(char gameBoard[3][3]) {
         printf("]\n");
     }
 }
+

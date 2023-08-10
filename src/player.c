@@ -9,8 +9,7 @@ void inputPlayerName(Player *player) {
     scanf("%s", player->name);
 }
 void playerInformation(Player player) {
-    printf("Player %d:\nName=: %s\n", *player.playerID, player.name);
-    printf("Score=: %d\n", *player.score);
+    printf("Player %d=: { Name=: %s, Score=: %d };\n", *player.playerID, player.name, *player.score);
 }
 void prepareData(Player *player, int ID) {
     player->score = (int*)malloc(sizeof(int));

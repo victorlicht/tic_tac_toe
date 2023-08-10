@@ -28,7 +28,7 @@ int inputGame(Player player) {
         printf("Invalid Input!!\n");
         return -1;
     }
-    printf("\nEnter the Column number=: ");
+    printf("Enter the Column number=: ");
     if(scanf("%d", player.columnInput) != 1 || (*player.columnInput != 0 && *player.columnInput != 1 && *player.columnInput != 2)){
         printf("Invalid Input!!\n");
         return -1;
@@ -42,5 +42,31 @@ bool theRightInputs(char gameBoard[3][3], Player player) {
         return false;
     }
     return true;
+}
+
+void play(char gameBoard[3][3], Player currentPlayer) {
+    int checkBoardInput;
+    do {
+        printf("=======================================\n");
+        printf("You can just enter the values {0, 1, 2}\n");
+        printf("Now %s Enter Your Move: ", currentPlayer.name);
+        checkBoardInput = inputGame(currentPlayer);
+        if (!theRightInputs(gameBoard, currentPlayer)) {
+            checkBoardInput = -1;
+            printf("There is an input there IDIOT!!\n");
+        }
+    } while (checkBoardInput == -1);
+}
+int winResult(char gameBoard[3][3], Player currentPlayer, int i) {
+    int result = checkWinner(gameBoard);
+    if (result != 0) {
+        printf("The player %s WIN :)\n", currentPlayer.name);
+        *currentPlayer.score += 1;
+        return result;
+    }else if (i == 8) {
+        printf("DRAW!\n");
+        return result;
+    }
+    return 99;
 }
 
