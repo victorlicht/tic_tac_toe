@@ -73,6 +73,12 @@ build CMakeFiles/tic_tac_toe.dir/src/game.c.o: C_COMPILER__tic_tac_toe_Debug /ho
   OBJECT_DIR = CMakeFiles/tic_tac_toe.dir
   OBJECT_FILE_DIR = CMakeFiles/tic_tac_toe.dir/src
 
+build CMakeFiles/tic_tac_toe.dir/src/robot.c.o: C_COMPILER__tic_tac_toe_Debug /home/vic/Desktop/CLang/tic_tac_toe/src/robot.c || cmake_object_order_depends_target_tic_tac_toe
+  DEP_FILE = CMakeFiles/tic_tac_toe.dir/src/robot.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu2x
+  OBJECT_DIR = CMakeFiles/tic_tac_toe.dir
+  OBJECT_FILE_DIR = CMakeFiles/tic_tac_toe.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target tic_tac_toe
@@ -81,7 +87,7 @@ build CMakeFiles/tic_tac_toe.dir/src/game.c.o: C_COMPILER__tic_tac_toe_Debug /ho
 #############################################
 # Link the executable tic_tac_toe
 
-build tic_tac_toe: C_EXECUTABLE_LINKER__tic_tac_toe_Debug CMakeFiles/tic_tac_toe.dir/src/main.c.o CMakeFiles/tic_tac_toe.dir/src/board.c.o CMakeFiles/tic_tac_toe.dir/src/player.c.o CMakeFiles/tic_tac_toe.dir/src/game.c.o
+build tic_tac_toe: C_EXECUTABLE_LINKER__tic_tac_toe_Debug CMakeFiles/tic_tac_toe.dir/src/main.c.o CMakeFiles/tic_tac_toe.dir/src/board.c.o CMakeFiles/tic_tac_toe.dir/src/player.c.o CMakeFiles/tic_tac_toe.dir/src/game.c.o CMakeFiles/tic_tac_toe.dir/src/robot.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/tic_tac_toe.dir
   POST_BUILD = :
