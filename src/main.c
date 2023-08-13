@@ -36,17 +36,17 @@ int main() {
                                          {0, 0, 0},
                                          {0, 0, 0} };
                 for (int i = 0; i < 9; i++) {
-                    if (i % 2 == 0) currentPlayer = player1;
-                    else currentPlayer = player2;
+                    if (i % 2 == 0) currentPlayer = robot;
+                    else currentPlayer = player1;
                     system("clear");
                     theBoard(gameBoard);
 
-                    play(gameBoard, currentPlayer);
+                    if (i%2!=0) play(gameBoard, currentPlayer);
                     // Update the game board with the player's move
 
                     gameBoard[*currentPlayer.rowInput][*currentPlayer.columnInput] = (i % 2 == 0) ? 'X' : 'O';
                     int result  = winResult(gameBoard, currentPlayer, i);
-                    printf("Result %d Row Input %d Column Input %d\n", playerAI(gameBoard, 8, NULL, robot), *robot.rowInput, *robot.columnInput);
+                    printf("Result %d Row Input %d Column Input %d\n", playerAI(gameBoard, 100, false, robot, true), *robot.rowInput, *robot.columnInput);
                     if (result != 99) break;
                 }
                 playerInformation(player1);
