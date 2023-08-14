@@ -5,58 +5,54 @@
 #include "../include/player.h"
 #include "stdbool.h"
 #include "stdio.h"
-int playerAI(char gameBoard[3][3], int depth, bool isMaximizing, Player robot, bool firstTime) {
+int playerAI(char gameBoard[3][3], int depth, int alpha, int beta, bool isMaximizing, Player robot) {
     int result = checkWinner(gameBoard);
     if (depth == 0 || result != 0) {
         return result;
     }
+
     if (isMaximizing) {
-        int finalScore = -10;
-        int i, j,  ii, jj;
-        for (i = 0; i < 3; i++) {
-            for (j = 0; j < 3; j++) {
+        int maxScore = -10;
+        int ii, jj;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 if (gameBoard[i][j] == 0) {
                     gameBoard[i][j] = 'X';
-                    int score = playerAI(gameBoard, depth - 1, false, robot, false);
+                    int score = playerAI(gameBoard, depth - 1, alpha, beta, false, robot);
                     gameBoard[i][j] = 0;
-                    if (finalScore < score) {
-                        finalScore = score;
+                    if (score > maxScore) {
+                        maxScore = score;
                         ii = i;
                         jj = j;
-
                     }
-                    if(firstTime) {
-                        printf("i: %d j: %d, %d\n", i, j, score);
-
+                    alpha = (alpha > score) ? alpha : score;
+                    if (beta <= alpha) {
+                        break; // Beta cutoff
                     }
                 }
-
             }
         }
-        *robot.columnInput = jj;
         *robot.rowInput = ii;
-        return finalScore;
-    }else {
-        int finalScore = 10;
-        int i, j;
-        for (i = 0; i < 3; i++) {
-            for (j = 0; j < 3; j++) {
+        *robot.columnInput = jj;
+        return maxScore;
+    } else {
+        int minScore = 10;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 if (gameBoard[i][j] == 0) {
                     gameBoard[i][j] = 'O';
-                    int score = playerAI(gameBoard, depth - 1, true, robot, false);
+                    int score = playerAI(gameBoard, depth - 1, alpha, beta, true, robot);
                     gameBoard[i][j] = 0;
-                    if (finalScore > score) {
-                        finalScore = score;
-
+                    if (score < minScore) {
+                        minScore = score;
                     }
-                    if(firstTime) {
-                        printf("i: %d j: %d, %d\n", i, j, score);
-
+                    beta = (beta < score) ? beta : score;
+                    if (beta <= alpha) {
+                        break; // Alpha cutoff
                     }
                 }
-
             }
         }
-        return finalScore;
+        return minScore;
     }
 }
