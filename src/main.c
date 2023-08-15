@@ -1,10 +1,14 @@
+/*
+ * Created by vic
+ */
 #include <stdio.h>
+#include "stdbool.h"
 #include "../include/player.h"
 #include "../include/game.h"
 #include "../include/board.h"
 #include "../include/robot.h"
+
 int main() {
-    menu:
     printf("---------------------------------\n");
     printf("|        Hello to Tic Tac Toe    |\n");
     printf("---------------------------------\n\n");
@@ -19,113 +23,87 @@ int main() {
     printf("Enter the corresponding number to choose your preferred mode or to exit the game.\n");
     printf("Option:= ");
     int option;
-    scanf("%d", &option);
-    system("clear");
-    printf("===========================\n");
-    Player player1;
-    Player player2;
-    Player currentPlayer;
-    Player robot;
-    prepareData(&player1, 1);
-    prepareData(&player2, 2);
-    prepareData(&robot, 3);
+    while (true) {
+        if (scanf("%d", &option) != 1)
+            printf("Invalid Input!!");
+        else break;
+    }
+    bool restart = true;
+    Player firstPlayer, secondPlayer, currentPlayer, robotPlayer;
     switch (option) {
         case 1:
-            while(true) {
-                char gameBoard[3][3] = { {0, 0, 0},
-                                         {0, 0, 0},
-                                         {0, 0, 0} };
-                for (int i = 0; i < 9; i++) {
-                    if (i % 2 == 0) currentPlayer = robot;
-                    else currentPlayer = player1;
-                    system("clear");
-                    theBoard(gameBoard);
-
-                    if (i%2!=0) play(gameBoard, currentPlayer);
-                    // Update the game board with the player's move
-
-                    gameBoard[*currentPlayer.rowInput][*currentPlayer.columnInput] = (i % 2 == 0) ? 'X' : 'O';
-                    int result  = winResult(gameBoard, currentPlayer, i);
-                    printf("Result %d Row Input %d Column Input %d\n", playerAI(gameBoard, 100, false, robot, true), *robot.rowInput, *robot.columnInput);
-                    if (result != 99) break;
+            while (true) {
+                printf("Choose with who you play\n");
+                printf("1. Friend\n");
+                printf("2. Computer\n");
+                printf("0. Exit\n");
+                int innerOption;
+                while (true) {
+                    if (scanf("%d", &innerOption) != 1)
+                        printf("Invalid Input!!");
+                    else break;
                 }
-                playerInformation(player1);
-                playerInformation(player2);
-                printf("Choose Option\n");
-                printf("1. restart the game\n");
-                printf("2. Go to menu\n");
-                printf("0. exit");
-                int option2;
-                scanf("%d", &option2);
-                switch (option2) {
+                switch (innerOption) {
                     case 1:
-                        continue;
+                        prepareData(&firstPlayer, 1);
+                        prepareData(&secondPlayer, 2);
+                        while(true) {
+                            //Initialization the board
+                            char gameBoard[3][3] = { {0, 0, 0},
+                                                     {0, 0, 0},
+                                                     {0, 0, 0} };
+                            for (int i = 0; i < 9; i++) {
+                                if (i % 2 == 0) currentPlayer = firstPlayer;
+                                else currentPlayer = secondPlayer;
+                                system("clear");
+                                theBoard(gameBoard);
+                                play(gameBoard, currentPlayer);
+                                // Update the game board with the player's move
+                                gameBoard[*currentPlayer.rowInput][*currentPlayer.columnInput] = (i % 2 == 0) ? 'X' : 'O';
+                                int result  = winResult(gameBoard, currentPlayer, i);
+                                if (result != 99) break;
+                            }
+                            playerInformation(firstPlayer);
+                            playerInformation(secondPlayer);
+                            printf("Choose Option\n");
+                            printf("1. Restart the game\n");
+                            printf("2. Go to menu\n");
+                            printf("0. Exit");
+                            int lastOption;
+                            while (true) {
+                                if (scanf("%d", &lastOption) != 1)
+                                    printf("Invalid Input!!");
+                                else break;
+                            }
+                            switch (lastOption) {
+                                case 1:
+                                    continue;
+                                case 2:
+                                    break;
+                                case 0:
+                                    exit(0);
+                                default:
+                                    printf("Invalid Input Turn Off Automatically");
+                                    exit(0);
+                            }
+                            break;
+                        }
                     case 2:
-                        goto menu;
+                        printf("Soon..");
+                        break;
                     case 0:
-                        freeData(player1);
-                        freeData(player2);
+                        freeData(firstPlayer);
+                        freeData(secondPlayer);
                         exit(0);
                     default:
-                        printf("Sorry Wrong Input\n Power Off Automatically");
-                        freeData(player1);
-                        freeData(player2);
+                        printf("Invalid Input Turn Off Automatically");
                         exit(0);
                 }
             }
         case 0:
-            while(true) {
-                char gameBoard[3][3] = { {0, 0, 0},
-                                         {0, 0, 0},
-                                         {0, 0, 0} };
-                for (int i = 0; i < 9; i++) {
-                    if (i % 2 == 0) currentPlayer = player1;
-                    else currentPlayer = robot;
-                    system("clear");
-                    theBoard(gameBoard);
-                    int checkBoardInput;
-                    do {
-                        printf("=======================================\n");
-                        printf("You can just enter the values {0, 1, 2}\n");
-                        printf("Now %s Enter Your Move:\n", currentPlayer.name);
-                        if (i % 2 == 0){
-                        checkBoardInput = inputGame(currentPlayer);}
-                    } while (checkBoardInput == -1);
-
-                    // Update the game board with the player's move
-                    gameBoard[*currentPlayer.rowInput][*currentPlayer.columnInput] = (i % 2 == 0) ? 'X' : 'O';
-                    int result  = winResult(gameBoard, currentPlayer, i);
-                    if (result != 99) break;
-                }
-                playerInformation(player1);
-                playerInformation(player2);
-                printf("Choose Option\n");
-                printf("1. restart the game\n");
-                printf("2. Go to menu\n");
-                printf("0. exit");
-                int option2;
-                scanf("%d", &option2);
-                switch (option2) {
-                    case 1:
-                        continue;
-                    case 2:
-                        goto menu;
-                    case 0:
-                        freeData(player1);
-                        freeData(player2);
-                        exit(0);
-                    default:
-                        printf("Sorry Wrong Input\n Power Off Automatically");
-                        freeData(player1);
-                        freeData(player2);
-                        exit(0);
-                }
-            }
+            exit(0);
         default:
-            printf("Sorry Wrong Input\nPower Off Automatically...");
+            printf("Invalid Input Turn Off Automatically");
             exit(0);
     }
 }
-
-
-

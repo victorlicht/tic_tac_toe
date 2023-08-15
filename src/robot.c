@@ -4,7 +4,6 @@
 #include "../include/game.h"
 #include "../include/player.h"
 #include "stdbool.h"
-#include "stdio.h"
 int playerAI(char gameBoard[3][3], int depth, int alpha, int beta, bool isMaximizing, Player robot) {
     int result = checkWinner(gameBoard);
     if (depth == 0 || result != 0) {
