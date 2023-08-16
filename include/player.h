@@ -16,6 +16,7 @@ typedef struct player {
 
 void inputPlayerName(Player *player);
 void playerInformation(Player player);
+void prepareRobotData(Player *player, int ID);
 void prepareData(Player *player, int ID);
 void freeData(Player player);
 #endif //TIC_TAC_TOE_PLAYER_H

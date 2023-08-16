@@ -60,6 +60,7 @@ void play(char gameBoard[3][3], Player currentPlayer) {
 int winResult(char gameBoard[3][3], Player currentPlayer, int i) {
     int result = checkWinner(gameBoard);
     if (result != 0) {
+        system("clear");
         printf("The player %s WIN :)\n", currentPlayer.name);
         *currentPlayer.score += 1;
         return result;
