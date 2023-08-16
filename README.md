@@ -1,6 +1,8 @@
 # Tic Tac Toe Game
 
 Welcome to the classic game of Tic Tac Toe! Test your tactical skills and strategic thinking in this battle of X's and O's.
+I use Minimax Algorithm & Alpha-Beta Pruning Algorithm to make a beatable robot.
+Feel free to play
 
 ## Getting Started
 
@@ -30,9 +32,9 @@ git clone https://github.com/victorlicht/tic_tac_toe/
 Navigate into the cloned project directory:
 
 ```bash
-cd /home/vic/Desktop/CLang/tic_tac_toe/cmake-build-debug
+cd /path/to/tic_tac_toe/cmake-build-debug
 ```
 Run the project:
 ```bash
-./tictactoe
+./tic_tac_toe
 ```
