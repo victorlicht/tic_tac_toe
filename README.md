@@ -2,7 +2,7 @@
 
 Welcome to the classic game of Tic Tac Toe! Test your tactical skills and strategic thinking in this battle of X's and O's.
 I use Minimax Algorithm & Alpha-Beta Pruning Algorithm to make a beatable robot.
-Feel free to play
+Feel free to play.
 
 ## Getting Started
 
@@ -13,8 +13,6 @@ Follow these steps to clone and run the Tic Tac Toe game on your local machine:
 Make sure you have the following installed on your system:
 
 - Git (for cloning the repository)
-- GCC (GNU Compiler Collection) for compiling and running the C code
-- Make (for building the project)
 
 ### Clone the Repository
 
