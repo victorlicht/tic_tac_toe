@@ -12,6 +12,7 @@ Make sure you have the following installed on your system:
 
 - Git (for cloning the repository)
 - GCC (GNU Compiler Collection) for compiling and running the C code
+- Make (for building the project)
 
 ### Clone the Repository
 
