@@ -30,7 +30,7 @@ git clone https://github.com/victorlicht/tic_tac_toe/
 Navigate into the cloned project directory:
 
 ```bash
-cd tic-tac-toe
+cd tic_tac_toe
 ```
 Compile the C code using the provided Makefile to build the executable:
 ```bash
