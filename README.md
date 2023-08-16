@@ -23,7 +23,7 @@ cd /path/to/your/desired/directory
 ```
 Clone the repository using Git:
 ```bash
-https://github.com/victorlicht/tic_tac_toe/
+git clone https://github.com/victorlicht/tic_tac_toe/
 ```
 ### Compile and Run
 
