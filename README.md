@@ -25,18 +25,14 @@ Clone the repository using Git:
 ```bash
 git clone https://github.com/victorlicht/tic_tac_toe/
 ```
-### Compile and Run
+### Run
 
 Navigate into the cloned project directory:
 
 ```bash
-cd tic_tac_toe
+cd /home/vic/Desktop/CLang/tic_tac_toe/cmake-build-debug
 ```
-Compile the C code using the provided Makefile to build the executable:
-```bash
-make build
-```
-Run the compiled executable:
+Run the project:
 ```bash
 ./tictactoe
 ```
